@@ -3,7 +3,7 @@
  *
  * Configures the LLM model used throughout the course.
  *
- * Default: Anthropic claude-haiku-4-5 (fast, cheap, great for learning).
+ * Default: OpenAI gpt-4o-mini (fast, inexpensive, and suitable for learning).
  *
  * ═══════════════════════════════════════════════════════════════════════════
  *   ⚠  IMPORTANT: install the matching package BEFORE swapping providers
@@ -11,7 +11,7 @@
  *
  *   Provider              Package                      Installed?
  *   --------------------  ---------------------------  ---------------------
- *   Anthropic (default)   @langchain/anthropic          yes (default dep)
+ *   Anthropic             @langchain/anthropic          yes (default dep)
  *   OpenAI                @langchain/openai             yes (default dep)
  *   Ollama                @langchain/ollama             yes (default dep)
  *   AWS Bedrock           @langchain/aws               install separately
@@ -44,12 +44,11 @@ config({ path: join(dirname(fileURLToPath(import.meta.url)), ".env"), override: 
 setGlobalDispatcher(new Agent({ connections: 64 }));
 
 // ═══ Default Models ══════════════════════════════════════════════════════════
-// Workshop default: Anthropic claude-haiku-4-5, fast and cost-effective.
-// Requires ANTHROPIC_API_KEY in .env
-export const model = await initChatModel("anthropic:claude-haiku-4-5", { timeout: 60_000, maxRetries: 2 });
+// Requires OPENAI_API_KEY in .env
+export const model = await initChatModel("openai:gpt-4o-mini", { timeout: 60_000, maxRetries: 2 });
 
 // A more capable model for steps that need stronger reasoning
-export const strongModel = await initChatModel("anthropic:claude-sonnet-5-5", { timeout: 120_000, maxRetries: 2 });
+export const strongModel = await initChatModel("openai:gpt-5-mini", { timeout: 120_000, maxRetries: 2 });
 
 // ═══ Alternative Models (comment out default above, uncomment one below) ═════
 // export const model = await initChatModel("anthropic:claude-sonnet-5-5");
